@@ -1,48 +1,87 @@
-# Passo 1: Importar base de dados
+# Bibliotecas
+import pyautogui
+import time
 import pandas as pd
-from twilio.rest import Client
 
-dataFrame = pd.read_csv(r"C:\Users\Austin\Desktop\Portifólio\Travel Bonus Analisys\clientes.csv", encoding='latin', sep=';')
 
-# Passo 2: Objetivos
-#   entender as informações disponíveis
+pyautogui.PAUSE = 1
+# Inicio da automação
+pyautogui.press('win')
+time.sleep(5)
+pyautogui.write('https://pages.hashtagtreinamentos.com/aula1-intensivao-sistema')
+pyautogui.press('enter')
+# Navegador
+time.sleep(5)
+pyautogui.click(x=647, y=325)
+pyautogui.write('caioaustim@gmail.com')
+pyautogui.click(x=630, y=421)
+pyautogui.write('c@34818263i0')
+pyautogui.click(x=626, y=496)
+# Google Drive
+time.sleep(5)
+pyautogui.click(x=870, y=308)
+time.sleep(5)
+pyautogui.click(x=909, y=619)
+# Lendo a base de dados
+tabela = pd.read_csv(r"C:\Users\Austin\Downloads\Compras.csv", sep=';')
+print(tabela)
 
-print(dataFrame.info())
+total_gasto = tabela['ValorFinal'].sum()
+quantidade = tabela['Quantidade'].sum()
+preco_medio = total_gasto / quantidade
+print(total_gasto)
+print(quantidade)
+print(preco_medio)
 
-#   procurar erros na base de dados --> Unnamed: 8 <--
+import pyperclip
 
-dataFrame = dataFrame.drop(['Unnamed: 8'], axis=1)
+# Indo para o Gmail em nova guia no navegador
+pyautogui.hotkey('ctrl','t')
 
-# Passo 3: tratamento no formato errado
-#   valores no formato errado
+time.sleep(5)
+pyautogui.write('https://mail.google.com/mail/u/0/?hl=pt-BR#inbox?compose=newl')
 
-pd.to_numeric(dataFrame['Salário Anual (R$)'], errors='coerce')
-print(dataFrame)
+time.sleep(5)
+pyautogui.press('enter')
 
-#   valores vazios --> 36 valores vazios <--
-# Passo 4: Analise inicial - entender a nota do cliente
+# Digitando E-mail
+time.sleep(10)
+pyautogui.click(x=78, y=150)
+time.sleep(5)
+pyautogui.write('katiabventura@gmail.com')
 
-import plotly.express as px
+time.sleep(2)
+pyautogui.press('tab')
 
-graph = px.histogram()
+# Assunto
+time.sleep(2)
+pyautogui.press('tab')
 
-for colunas in dataFrame.columns:
-    graph = px.histogram(dataFrame, histfunc='avg')
-    graph.show()
-# Passo 5: Analise completa traçar o perfil ideal do cliente
-#   entender como cada característica do cliente impacta na nota
-#   entender como a faixa etária do cliente mostra se é um cliente bom ou ruim
+msg = 'Relatório da Empresa'
+pyperclip.copy(msg)
+pyautogui.hotkey('ctrl', 'v')
 
-# Abrir os arquivos em Excel
-# Para cada arquivo:
-# Verificar se algum valor na coluna Vendas do arquivo é maior que 55.000
-# Se for maior que 55.000 -> Enviar SMS com nome, mes e vendas
+# Campo de texto
+time.sleep(2)
+pyautogui.click(x=756, y=362)
 
-# Your Account SID from twilio.com/console
-account_sid = "AC2628af3ef76cd40c0089afb9bfa8d7bf"
-# Your Auth Token from twilio.com/console
-auth_token  = "efcf79aafdb10f0a995188d8825be60d"
-client = Client(account_sid, auth_token)
+time.sleep(2)
+pyautogui.click(x=793, y=402)
+texto = ''' 
+Prezados, 
 
-# Caso contário não faça nada
+Segue o relatório de compras
 
+Total gasto: R$7.254.196,58
+Quantidade de Produtos: 9.715
+Preço Médio: R$746.70
+
+Qualquer duvida e só falar.
+Att., Rick do Python
+'''
+pyperclip.copy(texto)
+pyautogui.hotkey('ctrl', 'v')
+
+# Finalizando Automação
+time.sleep(2)
+pyautogui.click(x=756, y=722)
