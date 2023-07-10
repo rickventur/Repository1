@@ -1,0 +1,8 @@
+v = (input('Escreva algum valor: '))
+print('Tem espaços? {}'.format(v.isspace()))
+print('É um número? {}'.format(v.isnumeric()))
+print('É alfabético? {}'.format(v.isalpha()))
+print('Está alfanumérico? {}'.format(v.isalnum()))
+print('Está em maiusculas? {}'.format(v.isupper()))
+print('Está em minusculas? {}'.format(v.islower()))
+print('Está decimal? {}'.format(v.isdecimal()))

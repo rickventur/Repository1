@@ -1,0 +1,5 @@
+n = str(input('Digite seu nome completo: '))
+s = n.strip(' ')
+print(f'Seu nome em maiúsculas é {n.upper()}')
+print(f'Seu nome em minúsculas é {n.lower()}')
+print(f'Seu nome tem ao todo {s.strip()} letras.')
